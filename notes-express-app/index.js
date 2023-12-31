@@ -6,11 +6,7 @@ const cors = require("cors")
 require("dotenv").config()
  
 app.use(bodyParser.json())
-app.use(cors({
-    origin : [process.env.CLIENT],
-    methods: ["POST", "GET", "PUT", "DELETE"],
-    credentials: true
-}));
+app.use(cors());
 
 app.use("/users", require("./routes/users.js"))
 app.use("/notes", require("./routes/notes.js"))
