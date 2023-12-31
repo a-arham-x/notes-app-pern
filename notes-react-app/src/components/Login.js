@@ -49,7 +49,7 @@ function Login() {
 
     return (
         <>
-            <h1>Notesbase</h1>
+            <h1>Our Own Notes</h1>
             <form>
                 <label htmlFor="username">Username</label>
                 <input type="text" name="username" value={credentials.username} onChange={handleChange}/>
