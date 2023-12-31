@@ -41,7 +41,7 @@ function Navbar() {
     return (
         <>
             <nav>
-                    <p>NotesBase</p>
+                    <p>Our Own Notes</p>
                     <p>{user && user.user.name}</p>
                 
                 <ul>
