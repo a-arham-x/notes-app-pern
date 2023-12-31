@@ -1,0 +1,209 @@
+h1{
+    color: darkblue;
+    text-align: center;
+    margin-top: 100px;
+    font-size: 60px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid darkblue;
+    width: 250px;
+    margin: auto;
+    border-radius: 4px;
+    padding: 30px;
+    margin-top: 70px;
+}
+
+label{
+    margin: 5px;
+    font-size: 20px;
+    color: darkblue;
+    font-weight: 600;
+}
+
+.showPassword{
+    display: flex;
+}
+
+button{
+    background-color: darkblue;
+    color: white;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: white;
+    color: darkblue;
+    border-color: 2px solid darkblue;
+}
+
+pre{
+    text-align: center;
+    font-family: 'Roberto', "sans-serif";
+}
+
+nav{
+    display: flex;
+    background-color: black;
+    padding: 5px;
+    margin: 0;
+    align-items: center;
+}
+
+nav>p{
+    color: white;
+    font-size: 25px;
+    margin: 20px;
+}
+
+ul{
+    display: flex;
+    color: white;
+    font-size: 20px;
+    list-style: none;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+li{
+    cursor: pointer;
+    margin: 10px;
+}
+
+.all-notes{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.note-div{
+    flex: 0 0 calc(25% - 10px); 
+    margin: 5px; 
+    width: 200px;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.buttons img{
+    margin: 5px;
+    cursor: pointer;
+}
+
+.image-div{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.editing-form{
+    width: 700px;
+    margin-bottom: 100px;
+}
+
+.adding-form{
+    width: 700px;
+    margin-bottom: 100px;
+}
+
+#edit-image{
+    margin: auto;
+    width: 100px
+}
+
+.note-form>label{
+    font-size: 20px;
+}
+
+#title{
+    width: 650px;
+    height: 30px;
+}
+
+textarea{
+    width: 650px;
+    margin-bottom: 20px;
+}
+
+.edit-dialog{
+    display: none;
+}
+
+
+#customDialog{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    width: 25%;
+    margin: auto;
+    z-index: 1;
+    /* position: fixed; */
+}
+
+.page-head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page-head>img{
+    width: 60px;
+    margin: 30px;
+    margin-top: 80px;
+    cursor: pointer;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-row{
+    display: flex;
+    align-items: center;
+}
+
+.profile-row>h2{
+    font-size: 40px;
+    margin: 10px;
+}
+
+.profile-row>h3{
+    font-size: 35px;
+}
+
+.update-text{
+    text-align: center;
+    color: darkblue;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.update-form{
+    margin-top: 5px;
+}
+
+.update-form>input{
+    margin: 10px;
+}
+
+.delete-text{
+    text-align: center;
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.delete-text:hover{
+    color: darkred;
+}
+
