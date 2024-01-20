@@ -12,7 +12,7 @@ app.use("/users", require("./routes/users.js"))
 app.use("/notes", require("./routes/notes.js"))
 
 app.get("/", (req, res) => {
-    res.send("The App has started")
+    res.send("The App has started running")
 })
 
 app.listen(port)
