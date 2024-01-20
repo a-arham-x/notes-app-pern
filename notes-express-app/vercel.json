@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "scripts":{
-    "postinstall": "prisma generate"
-  },
   "builds": [
     {
       "src": "./index.js",
       "use": "@vercel/node"
+    },
+    {
+      "src": "prisma/schema.prisma",
+      "use": "@prisma/cli",
+      "config": { "generation": { "output": "prisma/client" } }
     }
   ],
   "routes": [
