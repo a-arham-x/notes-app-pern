@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const {body, validationResult} = require("express-validator")
-const client = require("../db.js")
 const fetchUser = require("../middlewares/fetchUser.js")
 const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient()
