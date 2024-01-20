@@ -3,6 +3,8 @@ const router = express.Router();
 const {body, validationResult} = require("express-validator")
 const client = require("../db.js")
 const fetchUser = require("../middlewares/fetchUser.js")
+const { PrismaClient } = require('@prisma/client')
+const prisma = new PrismaClient()
 
 router.post("/create", fetchUser, [
     body("title", {error: "Title of maximum length 16 characters is required"}).isLength({min: 1, max: 16}),
@@ -14,35 +16,67 @@ router.post("/create", fetchUser, [
         return res.json({message: errors.errors[0].msg.error, success: false})
     }
 
-    const note = await client.query("INSERT INTO notes.notes (user_id, time_created, title, content) VALUES ($1, $2, $3, $4) RETURNING time_created, title, content", [req.user.id, new Date(), req.body.title, req.body.content]);
-
-    return res.json({message: "New Note Created", note: note.rows[0], success: true})
+    const note = await prisma.notes.create({
+        data: {
+            user: {
+                connect: { id: parseInt(req.user.id) }
+            },
+            time_created: new Date(),
+            title: req.body.title,
+            content: req.body.content
+        }
+    })
+    
+    return res.json({message: "New Note Created", note, success: true})
 })        
 
 router.get("/get", fetchUser, async (req, res)=>{
-    const notes = await client.query("SELECT * FROM notes.notes WHERE user_id = $1", [req.user.id])
 
-    return res.json({notes: notes.rows, success: true})
+    const notes = await prisma.notes.findMany({
+        where: {
+            user_id: parseInt(req.user.id)
+        }
+    })
+    return res.json({notes: notes, success: true})
 })
 
 router.get("/get/:id", fetchUser, async (req, res)=>{
-    const notes = await client.query("SELECT * FROM notes.notes WHERE user_id = $1 AND note_id=$2", [req.user.id, req.params.id])
+    const note = await prisma.notes.findFirst({
+        where:{
+            id: parseInt(req.params.id),
+            user_id: req.user.id
+        }
+    })
 
-    return res.json({note: notes.rows[0], success: true})
+    return res.json({note, success: true})
 })
  
 router.put("/edit", fetchUser, [
-    body("note_id", {error: "Specify the note to modify"}).isLength({min: 1}),
-    body("title", {error: "Title of maximum length 16 characters is required"}).isLength({min: 1, max: 16}),
-    body("content", {error: "Content is required for every note"}).isLength({min: 1})
+    body("note_id", {error: "Specify the note to modify"}).isNumeric(),
+    body("title", {error: "Title of maximum length 16 characters is required"}).isLength({max: 16}),
+    body("content", {error: "Content is required for every note"})
 ], async (req, res)=>{
     const errors = validationResult(req);
              
     if (!errors.isEmpty()){
         return res.json({message: errors.errors[0].msg.error, success: false})
     }
+
+    const note = await prisma.notes.findUnique({
+        where: {
+            id: parseInt(req.body.note_id)
+        }
+    })
   
-    await client.query("UPDATE notes.notes SET title = $1, content = $2 WHERE note_id=$3", [req.body.title, req.body.content, req.body.note_id])
+    await prisma.notes.update({
+        where: {
+            id: parseInt(req.body.note_id)
+        },
+        data:{
+            title: req.body.title?req.body.title:note.title,
+            content: req.body.content?req.body.content:note.content
+        }
+    })
 
     return res.json({message: "Updates made successfully", success: true})
 })
@@ -56,7 +90,12 @@ router.delete("/delete", fetchUser, [
         return res.json({message: errors.errors[0].msg.error, success: false})
     }
   
-    await client.query("DELETE FROM notes.notes WHERE note_id = $1 AND user_id = $2", [req.body.note_id, req.user.id])
+    await prisma.notes.delete({
+        where:{
+            id: req.body.note_id,
+            user_id: req.user.id
+        }
+    })
 
     return res.json({message: "Note deleted", success: true})
 })
