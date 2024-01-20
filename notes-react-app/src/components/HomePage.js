@@ -30,7 +30,7 @@ function HomePage(props) {
       <h1>Your Notes Gallery</h1>
       <div className="all-notes">
         {notes && notes.notes.map((note) => {
-          return <Note key={note.note_id} note={note} fetchNotes={fetchNotes} changeNote={props.changeNote}/>
+          return <Note key={note?.note_id} note={note} fetchNotes={fetchNotes} changeNote={props.changeNote}/>
         })}
       </div>
     </>

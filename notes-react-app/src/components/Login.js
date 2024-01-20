@@ -38,12 +38,12 @@ function Login() {
             body: JSON.stringify(credentials)
         });
         const json = await response.json();
-        console.log(json);
+        console.log(json)
         if (json.success){
             localStorage.setItem("user-token", json.token)
             navigate("/home")
         }else{
-            console.log(json.message)
+            window.alert(json.message)
         }
     }
 

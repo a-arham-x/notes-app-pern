@@ -42,7 +42,7 @@ function Navbar() {
         <>
             <nav>
                     <p>Our Own Notes</p>
-                    <p>{user && user.user.name}</p>
+                    <p>{user && user.user?.name}</p>
                 
                 <ul>
                     <li onClick={moveToHome}>Home</li>
